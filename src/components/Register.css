@@ -1,0 +1,101 @@
+/* Container for the registration form */
+
+
+.register {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Focus styling for input fields */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+.forgot-link{
+    display: flex;
+}
+
+
+
+/* Button styling */
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.navigation-buttons button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 45%;
+    margin-top: 10px;
+    border: 1px solid #1e1e2f;
+}
+
+.navigation-buttons button.dark {
+    border: 1px solid white;
+
+}
+
+.navigation-buttons button.dark:hover {
+    background-color: white;
+    color: #1e1e2f;
+}
+
+.navigation-buttons button.light:hover {
+    background-color: #1e1e2f;
+    color: white;
+}
+
+/* Button disabled state */
+.navigation-buttons button:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+}
+
+/* Error message or feedback styling */
+.alert {
+    color: #f44336;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #f44336;
+    background: #ffe6e6;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.success-message {
+    color: #2e7d32;
+    background: #e6ffe6;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
