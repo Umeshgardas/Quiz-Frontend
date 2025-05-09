@@ -1,7 +1,7 @@
-// components/Navbar.js
-import React, { useState } from 'react';
-import './Navbar.css';
-import { useTheme } from '../context/ThemeContext';
+import React, { useState } from "react";
+import "./Navbar.css";
+import { useTheme } from "../context/ThemeContext";
+import { NavLink } from "react-router-dom";
 
 const Navbar = ({ username, onLogout }) => {
   const { theme, toggleTheme } = useTheme();
@@ -10,23 +10,31 @@ const Navbar = ({ username, onLogout }) => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
-    <div className="quiz-header">
-      <h1 className="quiz-title">Quiz App</h1>
+    <div className={`quiz-header ${theme}`}>
+      <NavLink to={"/quiz"}>
+        <h1 className={`quiz-title ${theme}`}>Quiz App</h1>
+      </NavLink>
 
       <div className="profile-container">
         <img
-          src="https://i.pravatar.cc/40" // Replace with real profile image or user prop
+          src="https://i.pravatar.cc/40"
           alt="Profile"
           className="profile-image"
           onClick={toggleDropdown}
         />
         {dropdownOpen && (
           <div className="dropdown-menu">
-            <div className="dropdown-item username">👤 {username}</div>
-            <div className="dropdown-item" >
+            <NavLink to={"/profile"}>
+              <div className="dropdown-item username">👤 {username}</div>
+            </NavLink>
+            <div className="dropdown-item">
               <span>🌓</span>
               <label className="switch">
-                <input type="checkbox" onClick={toggleTheme} />
+                <input
+                  type="checkbox"
+                  onChange={toggleTheme}
+                  checked={theme === "dark"}
+                />
                 <span className="slider round"></span>
               </label>
             </div>

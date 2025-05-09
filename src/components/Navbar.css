@@ -1,5 +1,8 @@
-
-.quiz-title {
+a:has(.quiz-title),
+a:has(.username) {
+  text-decoration: none;
+}
+a .quiz-title {
   font-size: 24px;
   font-weight: bold;
 }
@@ -26,7 +29,7 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   min-width: 180px;
   z-index: 1000;
 }
@@ -36,6 +39,8 @@
   border-bottom: 1px solid #eee;
   font-size: 14px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .dropdown-item:last-child {
@@ -44,6 +49,7 @@
 
 .dropdown-item:hover {
   background-color: #f5f5f5;
+  border-radius: 10px;
 }
 
 .logout {
@@ -54,7 +60,6 @@
   font-weight: bold;
   color: #333;
 }
-
 
 .switch {
   position: relative;

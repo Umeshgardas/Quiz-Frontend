@@ -1,0 +1,50 @@
+.question-palette {
+    margin: 20px;
+  }
+  
+  .questions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .question-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .status-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  
+  /* Color codes for each status */
+  .answered .status-box {
+    background-color: #28a745; /* Green */
+  }
+  
+  .not-attempted .status-box {
+    background-color: #6c757d; /* Gray */
+  }
+  
+  .review .status-box {
+    background-color: #ffc107; /* Yellow */
+  }
+  
+  .selected .status-box {
+    background-color: #007bff; /* Blue */
+  }
+  
+  /* Add hover effect if desired */
+  .question-button:hover {
+    opacity: 0.85;
+  }
+  

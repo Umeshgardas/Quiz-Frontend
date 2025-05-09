@@ -15,6 +15,8 @@ const Login = () => {
             const res = await axios.post('https://quiz-backend-mn2m.onrender.com/api/auth/login', { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('userEmail', email);
+console.log(res.data.user);
+
             alert('Login successful!');
             navigate('/quiz');
         } catch (err) {
