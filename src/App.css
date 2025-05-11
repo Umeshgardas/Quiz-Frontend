@@ -34,7 +34,9 @@ button {
   height: 100vh;
   background: linear-gradient(135deg, #00e0ff, #32ff95);
 }
+.login-container.dark{
 
+}
 p a{
   text-decoration: none;
   color: #007bff;

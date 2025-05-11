@@ -3,30 +3,63 @@ import axios from "axios";
 import "./AdminUpload.css";
 
 const subCategoriesMap = {
-  Arts: ["History", "Sociology"],
-  Commerce: ["NISM", "HISM"],
-  Science: ["Physics", "Biology"],
-  English: ["Grammar", "Literature"],
+  Commerce: ["NISM", "Others"],
 };
 
 const subjectCategoriesMap = {
   NISM: ["MF", "PMS"],
-  HISM: ["Banking", "Insurance"],
-  History: ["Ancient", "Modern"],
-  Sociology: ["Family", "Society"],
-  Physics: ["Mechanics", "Optics"],
-  Biology: ["Genetics", "Ecology"],
-  Grammar: ["Tenses", "Prepositions"],
-  Literature: ["Poetry", "Prose"],
+  Others: ["MBA_CET", "Insurance"],
 };
 
 const topicCategoriesMap = {
-  MF: ["Mutual Funds Overview", "NAV Calculation"],
-  PMS: ["Portfolio Types", "Strategy"],
-  Banking: ["Retail", "Corporate"],
-  Insurance: ["Life", "Health"],
-  Poetry: ["Sonnets", "Haiku"],
-  Prose: ["Essays", "Stories"],
+  MF: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
+  PMS: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
+  MBA_CET: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
+  Insurance: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
 };
 
 const AdminUpload = () => {
@@ -90,7 +123,7 @@ const AdminUpload = () => {
       };
 
       await axios.post(
-        "https://quiz-backend-mn2m.onrender.com/api/quiz/upload",
+        "http://localhost:4000/api/quiz/upload",
         payload
       );
 

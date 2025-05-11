@@ -1,45 +1,76 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./QuizPage.css";
-import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
 const subCategoriesMap = {
-  Arts: ["History", "Sociology"],
-  Commerce: ["NISM", "HISM"],
-  Science: ["Physics", "Biology"],
-  English: ["Grammar", "Literature"],
+  Commerce: ["NISM", "Others"],
 };
 
 const subjectCategoriesMap = {
   NISM: ["MF", "PMS"],
-  HISM: ["Banking", "Insurance"],
-  History: ["Ancient", "Modern"],
-  Sociology: ["Family", "Society"],
-  Physics: ["Mechanics", "Optics"],
-  Biology: ["Genetics", "Ecology"],
-  Grammar: ["Tenses", "Prepositions"],
-  Literature: ["Poetry", "Prose"],
+  Others: ["MBA_CET", "Insurance"],
 };
 
 const topicCategoriesMap = {
-  MF: ["Mutual Funds Overview", "NAV Calculation"],
-  PMS: ["Portfolio Types", "Strategy"],
-  Banking: ["Retail", "Corporate"],
-  Insurance: ["Life", "Health"],
-  Poetry: ["Sonnets", "Haiku"],
-  Prose: ["Essays", "Stories"],
-  // Add more if needed
+  MF: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
+  PMS: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
+  MBA_CET: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
+  Insurance: [
+    "Mock 1",
+    "Mock 2",
+    "Mock 3",
+    "Mock 4",
+    "Mock 5",
+    "Mock 6",
+    "Mock 7",
+    "Mock 8",
+    "Mock 9",
+    "Mock 10",
+  ],
 };
 
-const QuizPage = () => {
+const QuizPage = ({ userEmail }) => {
   const [questions, setQuestions] = useState([]);
   const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [subjectCategory, setSubjectCategory] = useState("");
   const [topicCategory, setTopicCategory] = useState("");
 
-  const [subCategory, setSubCategory] = useState("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [timer, setTimer] = useState(0);
@@ -47,18 +78,18 @@ const QuizPage = () => {
   const [quizEnded, setQuizEnded] = useState(false);
   const [score, setScore] = useState(0);
   const [quizTaken, setQuizTaken] = useState(false);
-  const navigate = useNavigate();
-  const userEmail = localStorage.getItem("userEmail");
-  const username = userEmail ? userEmail.split("@")[0] : "Guest";
+  // const username = userEmail ? userEmail.split("@")[0] : "Guest";
   const { theme } = useTheme();
   const [markedForReviewIndexes, setMarkedForReviewIndexes] = useState([]);
+  console.log(quizTaken, "quizHistory");
 
   const checkQuizStatus = async () => {
     try {
       const res = await axios.get(
-        `https://quiz-backend-mn2m.onrender.com/api/quiz/status/${userEmail}/${category}/${subCategory}`
+        `http://localhost:000/api/quiz/status/${userEmail}/${category}/${subCategory}`
       );
       setQuizTaken(res.data.quizTaken);
+      console.log(res.data.quizTaken, "quiess");
     } catch (err) {
       console.error("Error checking quiz status:", err);
     }
@@ -75,11 +106,11 @@ const QuizPage = () => {
       return;
     }
 
-    if (quizTaken) {
-      alert("You have already taken this quiz!");
-      return;
-    }
-    let baseURL = "https://quiz-backend-mn2m.onrender.com/api/quiz";
+    // if (quizTaken) {
+    //   alert("You have already taken this quiz!");
+    //   return;
+    // }
+    let baseURL = "http://localhost:4000/api/quiz";
     let url = "";
 
     if (category && subCategory && subjectCategory && topicCategory) {
@@ -88,6 +119,7 @@ const QuizPage = () => {
       url = `${baseURL}/${category}/${subCategory}/${subjectCategory}`;
     } else if (category && subCategory) {
       url = `${baseURL}/${category}/${subCategory}`;
+      console.log(url);
     } else {
       alert("Insufficient category information.");
       return;
@@ -128,12 +160,6 @@ const QuizPage = () => {
     }
     return () => clearInterval(interval);
   }, [quizStarted, quizEnded]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("userToken");
-    localStorage.removeItem("userEmail");
-    navigate("/login");
-  };
 
   const handleAnswerSelect = (option) => {
     setSelectedAnswers({ ...selectedAnswers, [currentQuestionIndex]: option });
@@ -179,15 +205,14 @@ const QuizPage = () => {
         user: userEmail,
         category: category.trim(),
         subCategory: subCategory.trim(),
+        subjectCategory: subjectCategory.trim(),
+        topicCategory: topicCategory.trim(),
         score: calculatedScore,
         total: questions.length,
         answers: selectedAnswers,
       };
 
-      await axios.post(
-        "https://quiz-backend-mn2m.onrender.com/api/quiz/submit",
-        payload
-      );
+      await axios.post("http://localhost:4000/api/quiz/submit", payload);
       setQuizTaken(true);
     } catch (err) {
       console.error("Error submitting quiz:", err);
@@ -197,7 +222,6 @@ const QuizPage = () => {
 
   return (
     <>
-      <Navbar onLogout={handleLogout} username={username} />
       {!quizStarted && (
         <div className="quiz-setup">
           <h2>Take a Quiz</h2>
@@ -337,7 +361,7 @@ const QuizPage = () => {
             className={`quiz-inner-container ${theme}`}
             style={{ width: "80%" }}
           >
-            <p className="quiz-inner-container-qnumber">
+            <p className={`quiz-inner-container-qnumber ${theme}`}>
               {currentQuestionIndex + 1} &nbsp;/&nbsp;{questions.length}
             </p>
             <div className={`timer ${theme}`}>
@@ -415,11 +439,51 @@ const QuizPage = () => {
       )}
 
       {quizEnded && (
-        <div className="quiz-container">
-          <h2>Quiz Completed</h2>
-          <p>
+        <div className={`result-list ${theme}`}>
+          <h2>
             Your Score: {score} / {questions.length}
-          </p>
+          </h2>
+          {score / questions.length >= 0.4 ? (
+            <p>🎉 Congratulations! You passed the quiz!</p>
+          ) : (
+            <p>😢 Better luck next time!</p>
+          )}
+          <h3>Quiz Results</h3>
+          {questions.map((q, idx) => {
+            const userAnswer = selectedAnswers[idx];
+            const isCorrect = userAnswer === q.correctAnswer;
+            const isNotAttempted = userAnswer === undefined;
+            // console.log(userAnswer, isCorrect,"checkingans");
+
+            return (
+              <div className={`question-item ${theme}`} key={idx}>
+                <p className={`${theme}`}>
+                  <strong>Q{idx + 1}:</strong> {q.question}
+                </p>
+                <p>
+                  <strong>Correct Answer: </strong>
+                  <span className="correct">{q.correctAnswer}</span>{" "}
+                </p>
+                {isNotAttempted ? (
+                  <p className="not-attempted">Your Answer: Not Attempted</p>
+                ) : isCorrect ? (
+                  <p>
+                    <strong>Your Answer:</strong>
+                    <span className="correct"> {userAnswer}</span>
+                  </p>
+                ) : (
+                  <p>
+                    <strong>Your Answer: </strong>
+                    <span className="wrong">{userAnswer}</span>{" "}
+                  </p>
+                )}
+                <p>
+                  <strong>Explanation: </strong>
+                  <span>{q.explanation}</span>
+                </p>
+              </div>
+            );
+          })}
         </div>
       )}
     </>

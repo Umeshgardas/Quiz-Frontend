@@ -1,4 +1,5 @@
 a:has(.quiz-title),
+a:has(.dropdown-item),
 a:has(.username) {
   text-decoration: none;
 }
@@ -26,17 +27,15 @@ a .quiz-title {
   position: absolute;
   right: 0;
   top: 55px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* border-radius: 10px; */
+  box-shadow: 0 -1px 10px rgb(255 255 255 / 20%);
   min-width: 180px;
   z-index: 1000;
 }
 
 .dropdown-item {
   padding: 10px 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
   font-size: 14px;
   cursor: pointer;
   display: flex;
@@ -48,8 +47,8 @@ a .quiz-title {
 }
 
 .dropdown-item:hover {
-  background-color: #f5f5f5;
-  border-radius: 10px;
+  background-color: #f2f2f2;
+  color: #1e1e2f;
 }
 
 .logout {
