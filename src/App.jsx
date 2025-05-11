@@ -10,6 +10,7 @@ import MyActivity from "./components/MyActivity";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import { UserContext } from "./context/UserContext";
+import Home from "./components/Home";
 
 const App = () => {
   const [userEmail, setUserEmail] = useState(localStorage.getItem("userEmail"));
@@ -30,13 +31,15 @@ const App = () => {
     setUserEmail(null);
     navigate("/login");
   };
-
+ // Hide navbar on /login and /register
+  const hideNavbarRoutes = ["/login", "/register"];
+  const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
   return (
     <UserContext.Provider value={{ userEmail, setUserEmail }}>
-      {userEmail && <Navbar onLogout={handleLogout} username={username} />}
+        {shouldShowNavbar && <Navbar onLogout={handleLogout} username={username} userEmail={userEmail} />}
 
       <Routes>
-        <Route path="/" element={<Login setUserEmail={setUserEmail} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setUserEmail={setUserEmail} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminUpload />} />

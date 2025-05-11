@@ -1,0 +1,45 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  min-height: 200px;
+  position: relative; /* Required for positioning the close button */
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+.modal-header{
+  margin-bottom: 1rem;
+}
+.modal-close:hover {
+  color: #f44336; /* Red color on hover */
+}
+
+.modal-content.dark {
+  box-shadow: 0 -1px 10px rgb(255 255 255 / 20%);
+}
+.modal-content.light {
+  box-shadow: 0 -1px 10px rgb(68 68 68 / 20%);
+}

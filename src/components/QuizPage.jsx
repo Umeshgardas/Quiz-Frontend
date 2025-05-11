@@ -3,7 +3,7 @@ import axios from "axios";
 import "./QuizPage.css";
 // import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-
+import LoginModal from "./LoginModal";
 const subCategoriesMap = {
   Commerce: ["NISM", "Others"],
 };
@@ -70,6 +70,7 @@ const QuizPage = ({ userEmail }) => {
   const [subCategory, setSubCategory] = useState("");
   const [subjectCategory, setSubjectCategory] = useState("");
   const [topicCategory, setTopicCategory] = useState("");
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -86,7 +87,7 @@ const QuizPage = ({ userEmail }) => {
   const checkQuizStatus = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:000/api/quiz/status/${userEmail}/${category}/${subCategory}`
+        `https://quiz-backend-mn2m.onrender.com/api/quiz/status/${userEmail}/${category}/${subCategory}`
       );
       setQuizTaken(res.data.quizTaken);
       console.log(res.data.quizTaken, "quiess");
@@ -97,7 +98,7 @@ const QuizPage = ({ userEmail }) => {
 
   const fetchQuestions = async () => {
     if (!userEmail) {
-      alert("User not logged in.");
+      setShowLoginModal(true);
       return;
     }
 
@@ -110,7 +111,7 @@ const QuizPage = ({ userEmail }) => {
     //   alert("You have already taken this quiz!");
     //   return;
     // }
-    let baseURL = "http://localhost:4000/api/quiz";
+    let baseURL = "https://quiz-backend-mn2m.onrender.com/api/quiz";
     let url = "";
 
     if (category && subCategory && subjectCategory && topicCategory) {
@@ -212,7 +213,7 @@ const QuizPage = ({ userEmail }) => {
         answers: selectedAnswers,
       };
 
-      await axios.post("http://localhost:4000/api/quiz/submit", payload);
+      await axios.post("https://quiz-backend-mn2m.onrender.com/api/quiz/submit", payload);
       setQuizTaken(true);
     } catch (err) {
       console.error("Error submitting quiz:", err);
@@ -486,6 +487,7 @@ const QuizPage = ({ userEmail }) => {
           })}
         </div>
       )}
+      <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </>
   );
 };

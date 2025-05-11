@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { useTheme } from "../context/ThemeContext";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
+import LoginModal from "./LoginModal";
 
-const Navbar = ({ username, onLogout }) => {
+const Navbar = ({ username, onLogout, userEmail }) => {
   const { theme, toggleTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null); // To track the dropdown and image container
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -20,6 +23,15 @@ const Navbar = ({ username, onLogout }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // 🔐 Checks user login before navigating
+  const handleDropdownClick = (path) => {
+    if (!userEmail) {
+      setShowLoginModal(true);
+      return;
+    }
+    navigate(path);
+  };
 
   return (
     <div className={`quiz-header ${theme}`}>
@@ -37,12 +49,21 @@ const Navbar = ({ username, onLogout }) => {
         {dropdownOpen && (
           <div className={`dropdown-menu ${theme}`}>
             <div className={`dropdown-item username ${theme}`}>{username}</div>
-            <NavLink to={"/profile"}>
-              <div className={`dropdown-item ${theme}`}>Profile</div>
-            </NavLink>
-            <NavLink to={"/myactivity"}>
-              <div className={`dropdown-item ${theme}`}>My Activity</div>
-            </NavLink>
+            
+            <div
+              className={`dropdown-item ${theme}`}
+              onClick={() => handleDropdownClick("/profile")}
+            >
+              Profile
+            </div>
+
+            <div
+              className={`dropdown-item ${theme}`}
+              onClick={() => handleDropdownClick("/myactivity")}
+            >
+              My Activity
+            </div>
+
             <div className={`dropdown-item ${theme}`}>
               <span>🌓</span>
               <label className="switch">
@@ -55,12 +76,20 @@ const Navbar = ({ username, onLogout }) => {
               </label>
             </div>
 
-            <div className={`dropdown-item logout ${theme}`} onClick={onLogout}>
-              🚪 Logout
-            </div>
+            {userEmail && (
+              <div
+                className={`dropdown-item logout ${theme}`}
+                onClick={onLogout}
+              >
+                🚪 Logout
+              </div>
+            )}
           </div>
         )}
       </div>
+
+      {/* 🔔 Login Modal Triggered on Unauthenticated Dropdown Click */}
+      <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </div>
   );
 };

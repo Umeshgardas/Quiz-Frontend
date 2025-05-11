@@ -11,7 +11,7 @@ const MyActivity = ({ userEmail }) => {
     const fetchQuizHistory = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/quiz/history/${userEmail}`
+          `https://quiz-backend-mn2m.onrender.com/api/quiz/history/${userEmail}`
         );
         setActivity(res.data);
       } catch (err) {

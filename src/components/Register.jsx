@@ -4,6 +4,7 @@ import "./Register.css";
 // import { NavLink, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
+import { NavLink } from "react-router-dom";
 
 const Register = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -18,7 +19,7 @@ const Register = () => {
     setSuccess("");
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/auth/register",
+        "https://quiz-backend-mn2m.onrender.com/api/auth/register",
         user
       );
       setSuccess(res.data.message || "Registered successfully!");

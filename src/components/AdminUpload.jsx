@@ -123,7 +123,7 @@ const AdminUpload = () => {
       };
 
       await axios.post(
-        "http://localhost:4000/api/quiz/upload",
+        "https://quiz-backend-mn2m.onrender.com/api/quiz/upload",
         payload
       );
 
