@@ -128,7 +128,7 @@ const QuizPage = ({ userEmail }) => {
     try {
       const res = await axios.get(url);
       setQuestions(res.data);
-      setTimer(res.data.length * 600);
+      setTimer(res.data.length * 80);
       setQuizStarted(true);
     } catch (err) {
       alert(err.response?.data?.message || "Failed to load quiz questions");

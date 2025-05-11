@@ -27,7 +27,7 @@ const Login = () => {
       setUserEmail(email); // Update App state
 
       alert("Login successful!");
-      navigate("/quiz");
+      navigate("/");
     } catch (err) {
       alert("Login failed!", err);
     }

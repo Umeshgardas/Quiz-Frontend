@@ -40,7 +40,7 @@
   .toggle-icon {
     position: absolute;
     right: 12px;
-    top: 50%;
+    top: 56%;
     transform: translateY(-50%);
     cursor: pointer;
     color: #888;

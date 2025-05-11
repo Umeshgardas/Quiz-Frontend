@@ -1,11 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import "./home.css"
 const Home = () => {
   return (
-    <div>
-      Welcome to Home
-      <NavLink to={"/login"}>Login</NavLink>
+    <div className="home-container">
+     
     </div>
   );
 };

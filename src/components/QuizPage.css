@@ -4,7 +4,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  margin-bottom: 3rem;
+  /* height: 10vh; */
+  /* width: 100vw; */
+  /* margin-bottom: 3rem; */
 }
 .question-navigator {
   min-height: 200px;
@@ -78,7 +80,6 @@ select {
   width: 30%;
   padding: 10px 15px;
   font-size: 16px;
-  /* border: 1px solid #ccc; */
   border-radius: 8px;
   background-color: #fff;
   color: #333;
@@ -129,7 +130,6 @@ select:focus {
   display: flex;
   justify-content: space-around;
   gap: 1rem;
-  /* padding-top: 3rem; */
 }
 
 .quiz-inner-container {
@@ -153,7 +153,6 @@ select:focus {
 .quiz-question {
   margin-bottom: 24px;
   padding: 16px;
-  /* border: 1px solid #e0e0e0; */
   margin-top: 1rem;
   border-radius: 6px;
 }
