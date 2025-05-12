@@ -29,7 +29,7 @@ const Login = () => {
       alert("Login successful!");
       navigate("/");
     } catch (err) {
-      alert("Login failed!", err);
+      alert("Login failed: " + err.response?.data?.message || err.message);
     }
   };
 
@@ -59,8 +59,8 @@ const Login = () => {
           </span>
         </div>
         <p className="forgot-link">
-          <NavLink to={"/register"}>
-            <span>Forgot password </span>
+          <NavLink to={"/forgot-password"}>
+            <span>Forgot password?</span>
           </NavLink>
         </p>
         <button onClick={handleLogin}>Login</button>

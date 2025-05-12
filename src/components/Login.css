@@ -1,66 +1,68 @@
-  .login-box {
-    /* background: #fff; */
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
+.login-box {
+  /* background: #fff; */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
 
-  .login-box h2 {
-    margin-bottom: 20px;
-    /* color: #333; */
-  }
+.login-box h2 {
+  margin-bottom: 20px;
+  /* color: #333; */
+}
 
-  .login-box input {
-    width: 100%;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-  }
+.login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
 
-  .login-box input:focus {
-    border-color: #007bff;
-  }
+.login-box input:focus {
+  border-color: #007bff;
+}
 
-  .password-wrapper {
-    position: relative;
-  }
+.password-wrapper {
+  position: relative;
+}
 
-  .password-wrapper input {
-    padding-right: 40px;
-  }
+.password-wrapper input {
+  padding-right: 40px;
+}
 
-  .toggle-icon {
-    position: absolute;
-    right: 12px;
-    top: 56%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #888;
-    font-size: 18px;
-  }
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  top: 56%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+}
 
-  .login-box button,
-  .register button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+.login-box button,
+.register button,
+.forgot-password-box button{
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  margin: 15px 0px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .login-box button:hover {
-    background-color: #0056b3;
-  }
+.login-box button:hover {
+  background-color: #0056b3;
+}

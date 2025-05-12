@@ -27,7 +27,9 @@ button {
 } */
 
 .register-container,
-.login-container {
+.login-container,
+.forgot-container
+{
   display: flex;
   justify-content: center;
   align-items: center;
