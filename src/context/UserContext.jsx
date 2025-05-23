@@ -1,5 +1,8 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 
-export const UserContext = createContext();
-
-export const useUser = () => useContext(UserContext);
+export const UserContext = createContext({
+  userEmail: null,
+  setUserEmail: () => {},
+  userRole: null,
+  setUserRole: () => {},
+});

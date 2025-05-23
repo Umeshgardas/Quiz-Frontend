@@ -1,0 +1,196 @@
+.admin-upload-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* prevent squishing on smaller screens */
+}
+table td,
+table th {
+  word-wrap: break-word;
+  max-width: 200px;
+}
+
+.admin-question-list {
+  width: 100%;
+  padding: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-question-list h3 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Table Styles */
+.admin-question-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+.admin-question-list th,
+.admin-question-list td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-question-list th {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: 600;
+}
+
+.admin-question-list td ul {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 0;
+}
+
+/* Button Styles */
+.admin-question-list button {
+  margin: 4px;
+  padding: 8px 12px;
+  width: fit-content;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-question-list h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table-btns.icon-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  color: #007bff;
+}
+
+.icon-btn.delete-icon:hover {
+  color: red;
+}
+
+/* Modal Content */
+.edit-modal-content {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.edit-modal-content h3 {
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.edit-modal-content p {
+  margin-bottom: 12px;
+  color: #444;
+}
+
+.edit-modal-content strong {
+  font-weight: 600;
+}
+
+.edit-modal-content input,
+.edit-modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.edit-modal-content input:focus,
+.edit-modal-content select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.edit-modal-content button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-modal-content button:hover {
+  background-color: #218838;
+}
+.admin-upload-container input,
+.admin-upload-container select {
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-upload-container input,
+  .admin-upload-container select,
+  .admin-upload-container button,
+  .edit-modal-content input,
+  .edit-modal-content select,
+  .edit-modal-content button {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .admin-question-list table {
+    font-size: 14px;
+  }
+
+  .admin-question-list td,
+  .admin-question-list th {
+    padding: 10px;
+  }
+
+  .admin-question-list button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}

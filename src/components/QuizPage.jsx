@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./QuizPage.css";
-// import { useNavigate } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
 import LoginModal from "./LoginModal";
+import QuizResult from "./Quiz/QuizResult";
+import Question from "./Quiz/Question";
 const subCategoriesMap = {
   Commerce: ["NISM", "Others"],
 };
@@ -79,11 +79,11 @@ const QuizPage = ({ userEmail }) => {
   const [quizEnded, setQuizEnded] = useState(false);
   const [score, setScore] = useState(0);
   const [quizTaken, setQuizTaken] = useState(false);
-  // const username = userEmail ? userEmail.split("@")[0] : "Guest";
-  const { theme } = useTheme();
   const [markedForReviewIndexes, setMarkedForReviewIndexes] = useState([]);
   console.log(quizTaken, "quizHistory");
-
+  useEffect(() => {
+    console.log("UserEmail:", userEmail);
+  }, [userEmail]);
   const checkQuizStatus = async () => {
     try {
       const res = await axios.get(
@@ -300,194 +300,32 @@ const QuizPage = ({ userEmail }) => {
         </div>
       )}
 
-      {quizStarted && !quizEnded && questions.length > 0 && (
-        <div className={`quiz-container ${theme}`} style={{ display: "flex" }}>
-          <div className={`question-navigator ${theme}`}>
-            <h4>Questions</h4>
-            <div className="grid-container">
-              <label className="custom-checkbox">
-                <input type="checkbox" disabled />
-                <span className="checkmark selected"></span>Selected
-              </label>
-              <label className="custom-checkbox">
-                <input type="checkbox" disabled />
-                <span className="checkmark answered"></span>Answered
-              </label>
-              <label className="custom-checkbox">
-                <input type="checkbox" disabled />
-                <span className="checkmark markreview"></span>Mark for review
-              </label>
-              <label className="custom-checkbox">
-                <input type="checkbox" disabled />
-                <span className="checkmark notattempted"></span>Not attempted
-              </label>
-            </div>
-            <div className="question-numbers">
-              {questions.map((_, index) => {
-                const isAttempted = Object.prototype.hasOwnProperty.call(
-                  selectedAnswers,
-                  index
-                );
-                const isSelected = currentQuestionIndex === index;
-                const isMarkedForReview =
-                  markedForReviewIndexes.includes(index);
+      <Question
+        quizStarted={quizStarted}
+        quizEnded={quizEnded}
+        questions={questions}
+        selectedAnswers={selectedAnswers}
+        currentQuestionIndex={currentQuestionIndex}
+        markedForReviewIndexes={markedForReviewIndexes}
+        setCurrentQuestionIndex={setCurrentQuestionIndex}
+        timer={timer}
+        handleAnswerSelect={handleAnswerSelect}
+        handleMarkForReviewToggle={handleMarkForReviewToggle}
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+        handleSubmitQuiz={handleSubmitQuiz}
+      />
 
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentQuestionIndex(index)}
-                    className={`question-numbers-button ${theme}
-                              ${isMarkedForReview ? "mark-review" : ""}
-                              ${isSelected ? "selected" : ""}
-                              ${
-                                !isAttempted && !isMarkedForReview
-                                  ? "not-attempted"
-                                  : ""
-                              }
-                              ${
-                                isAttempted && !isMarkedForReview
-                                  ? "attempted"
-                                  : ""
-                              }
-                              `}
-                  >
-                    {index + 1}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div
-            className={`quiz-inner-container ${theme}`}
-            style={{ width: "80%" }}
-          >
-            <p className={`quiz-inner-container-qnumber ${theme}`}>
-              {currentQuestionIndex + 1} &nbsp;/&nbsp;{questions.length}
-            </p>
-            <div className={`timer ${theme}`}>
-              Time Remaining: {Math.floor(timer / 60)}:
-              {(timer % 60).toString().padStart(2, "0")}
-            </div>
-            <div className={`quiz-question ${theme}`}>
-              <h4 className={`${theme}`}>
-                {questions[currentQuestionIndex].question}
-              </h4>
-              <ul>
-                {questions[currentQuestionIndex].options.map((opt, i) =>
-                  opt ? (
-                    <li key={i}>
-                      <label>
-                        <input
-                          type="radio"
-                          name={`question-${currentQuestionIndex}`}
-                          value={opt}
-                          checked={
-                            selectedAnswers[currentQuestionIndex] === opt
-                          }
-                          onChange={() => handleAnswerSelect(opt)}
-                        />{" "}
-                        &nbsp;{opt}
-                      </label>
-                    </li>
-                  ) : null
-                )}
-              </ul>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={markedForReviewIndexes.includes(
-                    currentQuestionIndex
-                  )}
-                  onChange={() =>
-                    handleMarkForReviewToggle(currentQuestionIndex)
-                  }
-                />
-                Mark for Review
-              </label>
-
-              <div className="question-status">
-                {Object.prototype.hasOwnProperty.call(
-                  selectedAnswers,
-                  currentQuestionIndex
-                ) ? (
-                  <span className="attempted-label">Attempted</span>
-                ) : (
-                  <span className="unattempted-label">Not Attempted</span>
-                )}
-              </div>
-            </div>
-            <div className="navigation-buttons">
-              <button
-                onClick={handlePrevious}
-                disabled={currentQuestionIndex === 0}
-                className={`${theme}`}
-              >
-                Previous
-              </button>
-              {currentQuestionIndex < questions.length - 1 ? (
-                <button onClick={handleNext} className={`${theme}`}>
-                  Next
-                </button>
-              ) : (
-                <button onClick={handleSubmitQuiz} className={`${theme}`}>
-                  Submit Quiz
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {quizEnded && (
-        <div className={`result-list ${theme}`}>
-          <h2>
-            Your Score: {score} / {questions.length}
-          </h2>
-          {score / questions.length >= 0.4 ? (
-            <p>🎉 Congratulations! You passed the quiz!</p>
-          ) : (
-            <p>😢 Better luck next time!</p>
-          )}
-          <h3>Quiz Results</h3>
-          {questions.map((q, idx) => {
-            const userAnswer = selectedAnswers[idx];
-            const isCorrect = userAnswer === q.correctAnswer;
-            const isNotAttempted = userAnswer === undefined;
-            // console.log(userAnswer, isCorrect,"checkingans");
-
-            return (
-              <div className={`question-item ${theme}`} key={idx}>
-                <p className={`${theme}`}>
-                  <strong>Q{idx + 1}:</strong> {q.question}
-                </p>
-                <p>
-                  <strong>Correct Answer: </strong>
-                  <span className="correct">{q.correctAnswer}</span>{" "}
-                </p>
-                {isNotAttempted ? (
-                  <p className="not-attempted">Your Answer: Not Attempted</p>
-                ) : isCorrect ? (
-                  <p>
-                    <strong>Your Answer:</strong>
-                    <span className="correct"> {userAnswer}</span>
-                  </p>
-                ) : (
-                  <p>
-                    <strong>Your Answer: </strong>
-                    <span className="wrong">{userAnswer}</span>{" "}
-                  </p>
-                )}
-                <p>
-                  <strong>Explanation: </strong>
-                  <span>{q.explanation}</span>
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      )}
-      <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <QuizResult
+        quizEnded={quizEnded}
+        score={score}
+        questions={questions}
+        selectedAnswers={selectedAnswers}
+      />
+      <LoginModal
+        show={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </>
   );
 };

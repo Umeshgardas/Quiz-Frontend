@@ -1,36 +1,117 @@
+/* === Anchor Tag Styles === */
 a:has(.quiz-title),
 a:has(.dropdown-item),
-a:has(.username) {
+a:has(.username),
+.dropdown-item a {
   text-decoration: none;
+  color: inherit;
 }
-a .quiz-title {
-  font-size: 24px;
+
+/* === Quiz Title === */
+.quiz-title {
+  font-size: 12px;
+  height: 40px;
+  width: 40px;
   font-weight: bold;
 }
+
+/* === Navbar Base === */
+.navbar,
+.navbar-toggle,
+.navbar-header,
+.profile-container {
+  display: flex;
+  align-items: center;
+}
+
 .navbar {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  padding: 0.2rem;
+  gap: 2rem;
+  width: fit-content;
 }
-.navbar .navlist {
-  margin-right: 2rem;
+
+.navbar-toggle {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* === Hamburger Icon === */
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+  display: block;
+}
+
+/* Hamburger Bars */
+.bar {
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
+}
+
+/* === Mobile Nav List === */
+.navlist {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.navlist.open {
   display: flex;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  z-index: 1000;
+}
+.bar.dark {
+  background-color: white;
+}
+.bar.light {
+  background-color: #1e1e2f;
+}
+
+/* === Nav List Items === */
+.navlist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
-.navbar .navlist ul {
+
+.navlist ul li {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
-.navbar .navlist ul a {
+.navlist ul li a {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-weight: 500;
+  border-radius: 5px;
   text-decoration: none;
 }
+
+.navlist ul li a:hover,
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+  color: #1e1e2f;
+}
+
+/* === Profile Section === */
 .profile-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+  gap: 10px;
   cursor: pointer;
-  gap: 5px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .profile-image {
@@ -41,45 +122,43 @@ a .quiz-title {
   border: 2px solid #ccc;
 }
 
+.username {
+  font-weight: bold;
+  color: #333;
+}
+
+/* === Dropdown Menu === */
 .dropdown-menu {
   position: absolute;
-  right: 0;
-  top: 55px;
-  /* border-radius: 10px; */
-  box-shadow: 0 -1px 10px rgb(255 255 255 / 20%);
+  right: 1rem;
+  top: 60px;
+  background: #fff;
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.2);
   min-width: 180px;
+  border-radius: 6px;
+  overflow: hidden;
   z-index: 1000;
 }
 
 .dropdown-item {
   padding: 10px 15px;
-  border-bottom: 1px solid rgb(255 255 255 / 20%);
   font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #eee;
 }
 
 .dropdown-item:last-child {
   border-bottom: none;
 }
 
-.dropdown-item:hover {
-  background-color: #f2f2f2;
-  color: #1e1e2f;
-}
-.dropdown-item a {
-  text-decoration: none;
-}
+/* === Special Classes === */
 .logout {
   color: #e53935;
 }
 
-.username {
-  font-weight: bold;
-  color: #333;
-}
-
+/* === Toggle Switch === */
 .switch {
   position: relative;
   display: inline-block;
@@ -111,10 +190,10 @@ a .quiz-title {
   position: absolute;
   height: 16px;
   width: 16px;
+  background-color: #fff;
   border-radius: 50%;
-  background-color: white;
-  left: 2px;
   bottom: 2px;
+  left: 2px;
   transition: 0.4s;
 }
 
@@ -126,6 +205,40 @@ input:checked + .slider::before {
   transform: translateX(20px);
 }
 
-.slider.round {
-  border-radius: 20px;
+/* === Responsive === */
+@media (min-width: 768px) {
+  .mobile-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+
+  .navlist {
+    display: flex !important;
+    background: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .navlist ul {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .navlist ul li a {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .username {
+    display: none;
+  }
 }

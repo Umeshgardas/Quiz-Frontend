@@ -1,68 +1,71 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AdminUpload.css";
+import { useTheme } from "../../context/ThemeContext";
 
-const subCategoriesMap = {
-  Commerce: ["NISM", "Others"],
-};
+const AdminUpload = ({ onUploadSuccess }) => {
+    const { theme } = useTheme();
+  
+  const subCategoriesMap = {
+    Commerce: ["NISM", "Others"],
+  };
 
-const subjectCategoriesMap = {
-  NISM: ["MF", "PMS"],
-  Others: ["MBA_CET", "Insurance"],
-};
+  const subjectCategoriesMap = {
+    NISM: ["MF", "PMS"],
+    Others: ["MBA_CET", "Insurance"],
+  };
 
-const topicCategoriesMap = {
-  MF: [
-    "Mock 1",
-    "Mock 2",
-    "Mock 3",
-    "Mock 4",
-    "Mock 5",
-    "Mock 6",
-    "Mock 7",
-    "Mock 8",
-    "Mock 9",
-    "Mock 10",
-  ],
-  PMS: [
-    "Mock 1",
-    "Mock 2",
-    "Mock 3",
-    "Mock 4",
-    "Mock 5",
-    "Mock 6",
-    "Mock 7",
-    "Mock 8",
-    "Mock 9",
-    "Mock 10",
-  ],
-  MBA_CET: [
-    "Mock 1",
-    "Mock 2",
-    "Mock 3",
-    "Mock 4",
-    "Mock 5",
-    "Mock 6",
-    "Mock 7",
-    "Mock 8",
-    "Mock 9",
-    "Mock 10",
-  ],
-  Insurance: [
-    "Mock 1",
-    "Mock 2",
-    "Mock 3",
-    "Mock 4",
-    "Mock 5",
-    "Mock 6",
-    "Mock 7",
-    "Mock 8",
-    "Mock 9",
-    "Mock 10",
-  ],
-};
+  const topicCategoriesMap = {
+    MF: [
+      "Mock 1",
+      "Mock 2",
+      "Mock 3",
+      "Mock 4",
+      "Mock 5",
+      "Mock 6",
+      "Mock 7",
+      "Mock 8",
+      "Mock 9",
+      "Mock 10",
+    ],
+    PMS: [
+      "Mock 1",
+      "Mock 2",
+      "Mock 3",
+      "Mock 4",
+      "Mock 5",
+      "Mock 6",
+      "Mock 7",
+      "Mock 8",
+      "Mock 9",
+      "Mock 10",
+    ],
+    MBA_CET: [
+      "Mock 1",
+      "Mock 2",
+      "Mock 3",
+      "Mock 4",
+      "Mock 5",
+      "Mock 6",
+      "Mock 7",
+      "Mock 8",
+      "Mock 9",
+      "Mock 10",
+    ],
+    Insurance: [
+      "Mock 1",
+      "Mock 2",
+      "Mock 3",
+      "Mock 4",
+      "Mock 5",
+      "Mock 6",
+      "Mock 7",
+      "Mock 8",
+      "Mock 9",
+      "Mock 10",
+    ],
+  };
 
-const AdminUpload = () => {
   const [data, setData] = useState({
     question: "",
     options: ["", "", "", ""],
@@ -122,11 +125,7 @@ const AdminUpload = () => {
         topicCategory: data.topicCategory.trim(),
       };
 
-      await axios.post(
-        "https://quiz-backend-mn2m.onrender.com/api/quiz/upload",
-        payload
-      );
-
+      await axios.post("https://quiz-backend-mn2m.onrender.com/api/quiz/upload", payload);
       alert("Question uploaded!");
 
       setData({
@@ -139,6 +138,8 @@ const AdminUpload = () => {
         subjectCategory: "",
         topicCategory: "",
       });
+
+      onUploadSuccess(); // Refresh the question list
     } catch (err) {
       console.error("Upload failed:", err);
       alert("Upload failed. Check console for error.");
@@ -148,7 +149,7 @@ const AdminUpload = () => {
   };
 
   return (
-    <div className="admin-upload-container">
+    <div className={`admin-upload-container ${theme} `}>
       <h2>Admin Upload</h2>
 
       <input

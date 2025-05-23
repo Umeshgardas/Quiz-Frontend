@@ -81,8 +81,6 @@ select {
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 8px;
-  background-color: #fff;
-  color: #333;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -163,6 +161,7 @@ select:focus {
 .question-navigator.dark,
 .question-item.dark,
 .dropdown-menu.dark,
+.contact-form.dark,
 .quiz-inner-container-qnumber.dark {
   box-shadow: 0 -1px 10px rgb(255 255 255 / 20%);
 }
@@ -172,6 +171,7 @@ select:focus {
 .dropdown-menu.light,
 .question-item.light,
 .quiz-inner-container-qnumber.light,
+.contact-form.light,
 .question-navigator.light {
   box-shadow: 0 -1px 10px rgb(68 68 68 / 20%);
 }
@@ -229,7 +229,7 @@ select:focus {
 }
 
 .question-numbers-button.not-attempted {
-  background-color: #ccc;
+  background-color: #9b9a9a;
   color: #000;
 }
 

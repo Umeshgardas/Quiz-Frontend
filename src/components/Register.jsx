@@ -101,7 +101,12 @@ import { useTheme } from "../context/ThemeContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 const Register = () => {
-  const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "user", 
+  });
   const [emailForOtp, setEmailForOtp] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
